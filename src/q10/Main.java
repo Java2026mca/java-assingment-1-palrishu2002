@@ -1,21 +1,27 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        Stack<Integer> st = new Stack<>();
 
-        // TODO: Evaluate a postfix (Reverse Polish Notation) expression
-        //       Operands are non-negative integers, operators are: + - * /
-        //       Use a stack to evaluate
-        //       Input: single line, tokens separated by spaces
-        //       Output: integer result
-        //
-        // Input: 5 1 2 + 4 * + 3 -
-        // Output: 14
-        //
-        // Explanation: 5 + ((1+2)*4) - 3 = 5 + 12 - 3 = 14
+        for(char c: s.toCharArray()){
+            if(Character.isDigit(c)){
+                st.push(c-'0');
+            } else {
+                int b = st.pop();
+                int a = st.pop();
 
-        String line = sc.nextLine();
+                switch(c){
+                    case '+': st.push(a+b); break;
+                    case '-': st.push(a-b); break;
+                    case '*': st.push(a*b); break;
+                    case '/': st.push(a/b); break;
+                }
+            }
+        }
 
+        System.out.println(st.pop());
     }
 }
