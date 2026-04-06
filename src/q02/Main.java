@@ -1,19 +1,22 @@
-for (int i = 0; i < n; i++) {
-    int num = 1;
+import java.util.Scanner;
 
-    for (int j = 0; j <= i; j++) {
-        System.out.print(num);
-
-        // space only between numbers
-        if (j < i) {
-            System.out.print(" ");
+public class Main {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows to print
+        
+        for (int i = 0; i < rows; i++) {
+            // Print leading spaces for pyramid structure
+            for (int j = 0; j < rows - i; j++) {
+                System.out.print(" ");
+            }
+            
+            int number = 1;
+            for (int j = 0; j <= i; j++) {
+                System.out.print(number + " ");
+                // Pascal's formula: C(n, k) = C(n, k-1) * (n-k+1) / k
+                number = number * (i - j) / (j + 1);
+            }
+            System.out.println();
         }
-
-        num = num * (i - j) / (j + 1);
-    }
-
-    // new line (every row)
-    if (i < n - 1) {
-        System.out.println();
     }
 }
