@@ -39,8 +39,15 @@ for (int i = 0; i < n; i++) {
 
 // Diagonal sum
 int sum = 0;
+
 for (int i = 0; i < n; i++) {
-    sum += a[i][i];
+    sum += a[i][i];           // primary diagonal
+    sum += a[i][n - i - 1];   // secondary diagonal
+}
+
+// center element double add ho raha hota hai (odd n me)
+if (n % 2 == 1) {
+    sum -= a[n/2][n/2];
 }
 
 System.out.println("Diagonal: " + sum);
