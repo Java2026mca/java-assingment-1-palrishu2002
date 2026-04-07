@@ -1,23 +1,27 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int type = sc.nextInt();
 
-        if(type==1){
+        String shape = sc.next();
+
+        if (shape.equalsIgnoreCase("circle")) {
             double r = sc.nextDouble();
-            System.out.println(Math.PI*r*r);
-        }
-        else if(type==2){
+            double area = Math.PI * r * r;
+            System.out.printf("%.2f\n", area);
+        } 
+        else if (shape.equalsIgnoreCase("rectangle")) {
             double l = sc.nextDouble();
             double b = sc.nextDouble();
-            System.out.println(l*b);
-        }
-        else if(type==3){
-            double b = sc.nextDouble();
-            double h = sc.nextDouble();
-            System.out.println(0.5*b*h);
+            double area = l * b;
+            System.out.printf("%.2f\n", area);
+        } 
+        else if (shape.equalsIgnoreCase("triangle")) {
+            double base = sc.nextDouble();
+            double height = sc.nextDouble();
+            double area = 0.5 * base * height;
+            System.out.printf("%.2f\n", area);
         }
     }
 }
