@@ -3,35 +3,44 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
 
-        int n = sc.nextInt();
-        int[] arr = new int[n];
+        String[] tokens = line.trim().split(" ");
+        int[] stack = new int[tokens.length];
+        int top = -1;
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+        for (String token : tokens) {
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
 
-        int swaps = 0;
+                int b = stack[top--];
+                int a = stack[top--];
+                int result = 0;
 
-        // Modified Selection Sort (swap whenever smaller found)
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (arr[j] < arr[i]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                    swaps++;
-                }
+                if (token.equals("+")) result = a + b;
+                else if (token.equals("-")) result = a - b;
+                else if (token.equals("*")) result = a * b;
+                else if (token.equals("/")) result = a / b;
+
+                stack[++top] = result;
+
+            } else {
+                int num = Integer.parseInt(token);
+                stack[++top] = num;
             }
         }
 
-        // Print array (NO extra space)
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr[i]);
-            if (i < n - 1) System.out.print(" ");
-        }
-        System.out.println();
+        System.out.println(stack[top]);
 
-        System.out.println("Swaps: " + swaps);
+        // TODO: Evaluate a postfix (Reverse Polish Notation) expression
+        //       Operands are non-negative integers, operators are: + - * /
+        //       Use a stack to evaluate
+        //       Input: single line, tokens separated by spaces
+        //       Output: integer result
+        //
+        // Input: 5 1 2 + 4 * + 3 -
+        // Output: 14
+        //
+        // Explanation: 5 + ((1+2)*4) - 3 = 5 + 12 - 3 = 14
+
     }
 }
