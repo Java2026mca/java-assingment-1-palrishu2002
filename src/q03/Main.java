@@ -12,7 +12,7 @@ public class Main {
         int left = 0, right = n - 1;
         int num = 1;
 
-        // Spiral fill
+        // 🔄 Spiral Fill
         while (top <= bottom && left <= right) {
 
             // left → right
@@ -44,7 +44,7 @@ public class Main {
             }
         }
 
-        // Print matrix
+        // 🖨️ Print Matrix
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print(a[i][j]);
@@ -53,7 +53,7 @@ public class Main {
             System.out.println();
         }
 
-        // BOTH diagonals sum
+        // ➕ Diagonal Sum (BOTH diagonals)
         int sum = 0;
 
         for (int i = 0; i < n; i++) {
@@ -61,7 +61,7 @@ public class Main {
             sum += a[i][n - i - 1];     // secondary diagonal
         }
 
-        // remove duplicate center (for odd n)
+        // ⚠️ Avoid double count (center element)
         if (n % 2 == 1) {
             sum -= a[n / 2][n / 2];
         }
