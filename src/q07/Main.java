@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int t = sc.nextInt(); // number of test cases
+        int t = sc.nextInt();
 
         while (t-- > 0) {
             int n = sc.nextInt();
@@ -16,7 +16,6 @@ public class Main {
 
             int swaps = 0;
 
-            // Correct swap logic (grader expected)
             for (int i = 0; i < n - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
                     if (arr[j] < arr[i]) {
@@ -28,7 +27,6 @@ public class Main {
                 }
             }
 
-            // Print sorted array (NO extra space)
             for (int i = 0; i < n; i++) {
                 System.out.print(arr[i]);
                 if (i < n - 1) System.out.print(" ");
