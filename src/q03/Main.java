@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
@@ -52,10 +53,17 @@ public class Main {
             System.out.println();
         }
 
-        // Primary diagonal sum only
+        // BOTH diagonals sum
         int sum = 0;
+
         for (int i = 0; i < n; i++) {
-            sum += a[i][i];
+            sum += a[i][i];             // primary diagonal
+            sum += a[i][n - i - 1];     // secondary diagonal
+        }
+
+        // remove duplicate center (for odd n)
+        if (n % 2 == 1) {
+            sum -= a[n / 2][n / 2];
         }
 
         System.out.println("Diagonal: " + sum);
