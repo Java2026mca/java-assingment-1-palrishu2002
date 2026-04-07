@@ -4,54 +4,66 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-         for (int i = 0; i < n; i++) {
-    int x = sc.nextInt();
 
-    // Check Prime
-    boolean isPrime = true;
-    if (x <= 1) isPrime = false;
-    for (int j = 2; j * j <= x; j++) {
-        if (x % j == 0) {
-            isPrime = false;
-            break;
+        int[][] mat = new int[n][n];
+
+        int top = 0, bottom = n - 1;
+        int left = 0, right = n - 1;
+        int num = 1;
+
+        // Spiral fill
+        while (top <= bottom && left <= right) {
+
+            // top row
+            for (int i = left; i <= right; i++) {
+                mat[top][i] = num++;
+            }
+            top++;
+
+            // right column
+            for (int i = top; i <= bottom; i++) {
+                mat[i][right] = num++;
+            }
+            right--;
+
+            // bottom row
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    mat[bottom][i] = num++;
+                }
+                bottom--;
+            }
+
+            // left column
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    mat[i][left] = num++;
+                }
+                left++;
+            }
         }
-    }
 
-    // Check Perfect
-    int sum = 0;
-    for (int j = 1; j <= x / 2; j++) {
-        if (x % j == 0) {
-            sum += j;
+        // Print matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(mat[i][j]);
+                if (j < n - 1) System.out.print(" ");
+            }
+            System.out.println();
         }
-    }
-    boolean isPerfect = (sum == x && x != 0);
 
-    // Output
-    if (isPrime && isPerfect) {
-        System.out.println("Both");
-    } else if (isPrime) {
-        System.out.println("Prime");
-    } else if (isPerfect) {
-        System.out.println("Perfect");
-    } else {
-        System.out.println("Neither");
-    }
-}
-        // TODO: Read n integers. For each number print:
-        //   "Prime"     if it is prime
-        //   "Perfect"   if it is a perfect number (sum of proper divisors == itself, e.g. 6=1+2+3)
-        //   "Both"      if it is both (there are none < 100, but handle it)
-        //   "Neither"   otherwise
-        //
-        // Input:
-        // 4
-        // 6 13 8 28
-        //
-        // Output:
-        // Perfect
-        // Prime
-        // Neither
-        // Perfect
+        // Diagonal sum
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += mat[i][i];               // primary
+            sum += mat[i][n - 1 - i];       // secondary
+        }
 
+        // Avoid double count center
+        if (n % 2 == 1) {
+            sum -= mat[n / 2][n / 2];
+        }
+
+        System.out.println(sum);
     }
 }
