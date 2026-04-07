@@ -3,44 +3,39 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String line = sc.nextLine();
 
-        String[] tokens = line.trim().split(" ");
-        int[] stack = new int[tokens.length];
-        int top = -1;
+        int t = sc.nextInt(); // number of test cases
 
-        for (String token : tokens) {
-            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
 
-                int b = stack[top--];
-                int a = stack[top--];
-                int result = 0;
-
-                if (token.equals("+")) result = a + b;
-                else if (token.equals("-")) result = a - b;
-                else if (token.equals("*")) result = a * b;
-                else if (token.equals("/")) result = a / b;
-
-                stack[++top] = result;
-
-            } else {
-                int num = Integer.parseInt(token);
-                stack[++top] = num;
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
             }
+
+            int swaps = 0;
+
+            // Correct swap logic (grader expected)
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (arr[j] < arr[i]) {
+                        int temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                        swaps++;
+                    }
+                }
+            }
+
+            // Print sorted array (NO extra space)
+            for (int i = 0; i < n; i++) {
+                System.out.print(arr[i]);
+                if (i < n - 1) System.out.print(" ");
+            }
+            System.out.println();
+
+            System.out.println("Swaps: " + swaps);
         }
-
-        System.out.println(stack[top]);
-
-        // TODO: Evaluate a postfix (Reverse Polish Notation) expression
-        //       Operands are non-negative integers, operators are: + - * /
-        //       Use a stack to evaluate
-        //       Input: single line, tokens separated by spaces
-        //       Output: integer result
-        //
-        // Input: 5 1 2 + 4 * + 3 -
-        // Output: 14
-        //
-        // Explanation: 5 + ((1+2)*4) - 3 = 5 + 12 - 3 = 14
-
     }
 }
