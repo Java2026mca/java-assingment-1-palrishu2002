@@ -13,20 +13,19 @@ public class Main {
 
         int swaps = 0;
 
-        // Insertion Sort (count shifts as swaps)
-        for (int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i - 1;
-
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j--;
-                swaps++; // count each shift
+        // Modified Selection Sort (swap whenever smaller found)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[i]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                    swaps++;
+                }
             }
-            arr[j + 1] = key;
         }
 
-        // Print sorted array (no extra space)
+        // Print array (NO extra space)
         for (int i = 0; i < n; i++) {
             System.out.print(arr[i]);
             if (i < n - 1) System.out.print(" ");
