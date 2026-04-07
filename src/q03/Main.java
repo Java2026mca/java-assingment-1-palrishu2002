@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
@@ -15,23 +14,31 @@ public class Main {
         // Spiral fill
         while (top <= bottom && left <= right) {
 
-            for (int i = left; i <= right; i++)
+            // left → right
+            for (int i = left; i <= right; i++) {
                 a[top][i] = num++;
+            }
             top++;
 
-            for (int i = top; i <= bottom; i++)
+            // top → bottom
+            for (int i = top; i <= bottom; i++) {
                 a[i][right] = num++;
+            }
             right--;
 
+            // right → left
             if (top <= bottom) {
-                for (int i = right; i >= left; i--)
+                for (int i = right; i >= left; i--) {
                     a[bottom][i] = num++;
+                }
                 bottom--;
             }
 
+            // bottom → top
             if (left <= right) {
-                for (int i = bottom; i >= top; i--)
+                for (int i = bottom; i >= top; i--) {
                     a[i][left] = num++;
+                }
                 left++;
             }
         }
@@ -45,19 +52,12 @@ public class Main {
             System.out.println();
         }
 
-        // Diagonal sum
+        // Primary diagonal sum only
         int sum = 0;
-
         for (int i = 0; i < n; i++) {
             sum += a[i][i];
-            sum += a[i][n - i - 1];
         }
 
-        if (n % 2 == 1) {
-            sum -= a[n/2][n/2];
-        }
-
-        // ⚠️ IMPORTANT CHANGE
-        System.out.println(sum);   // remove "Diagonal: "
+        System.out.println("Diagonal: " + sum);
     }
 }
