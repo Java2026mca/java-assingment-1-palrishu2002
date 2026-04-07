@@ -14,19 +14,16 @@ public class Main {
         // Spiral fill
         while (top <= bottom && left <= right) {
 
-            // top row
             for (int i = left; i <= right; i++) {
                 mat[top][i] = num++;
             }
             top++;
 
-            // right column
             for (int i = top; i <= bottom; i++) {
                 mat[i][right] = num++;
             }
             right--;
 
-            // bottom row
             if (top <= bottom) {
                 for (int i = right; i >= left; i--) {
                     mat[bottom][i] = num++;
@@ -34,7 +31,6 @@ public class Main {
                 bottom--;
             }
 
-            // left column
             if (left <= right) {
                 for (int i = bottom; i >= top; i--) {
                     mat[i][left] = num++;
@@ -52,18 +48,13 @@ public class Main {
             System.out.println();
         }
 
-        // Diagonal sum
+        // ONLY PRIMARY DIAGONAL SUM
         int sum = 0;
         for (int i = 0; i < n; i++) {
-            sum += mat[i][i];               // primary
-            sum += mat[i][n - 1 - i];       // secondary
+            sum += mat[i][i];
         }
 
-        // Avoid double count center
-        if (n % 2 == 1) {
-            sum -= mat[n / 2][n / 2];
-        }
-
-        System.out.println(sum);
+        // Correct output format
+        System.out.println("Diagonal: " + sum);
     }
 }
