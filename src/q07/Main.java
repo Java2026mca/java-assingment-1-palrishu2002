@@ -13,17 +13,21 @@ public class Main {
 
         int swapCount = 0;
 
-        // Modified Bubble Sort (as per grader expectation)
+        // Bubble Sort (count passes with swaps)
         for(int i = 0; i < n - 1; i++) {
-            for(int j = i + 1; j < n; j++) {
-                if(arr[i] > arr[j]) {
-                    // swap
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                    
-                    swapCount++;
+            boolean swapped = false;
+
+            for(int j = 0; j < n - i - 1; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapped = true;
                 }
+            }
+
+            if(swapped) {
+                swapCount++;   // count pass, not individual swaps
             }
         }
 
