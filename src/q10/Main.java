@@ -1,27 +1,46 @@
-import java.util.*;
+import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        Stack<Integer> st = new Stack<>();
 
-        for(char c: s.toCharArray()){
-            if(Character.isDigit(c)){
-                st.push(c-'0');
-            } else {
-                int b = st.pop();
-                int a = st.pop();
+    public static int evaluatePostfix(String exp) {
+        Stack<Integer> stack = new Stack<>();
 
-                switch(c){
-                    case '+': st.push(a+b); break;
-                    case '-': st.push(a-b); break;
-                    case '*': st.push(a*b); break;
-                    case '/': st.push(a/b); break;
+        for (int i = 0; i < exp.length(); i++) {
+            char ch = exp.charAt(i);
+
+            // Skip spaces
+            if (ch == ' ')
+                continue;
+
+            // If digit, push to stack
+            if (Character.isDigit(ch)) {
+                stack.push(ch - '0');
+            } 
+            else {
+                int val2 = stack.pop();
+                int val1 = stack.pop();
+
+                switch (ch) {
+                    case '+':
+                        stack.push(val1 + val2);
+                        break;
+                    case '-':
+                        stack.push(val1 - val2);
+                        break;
+                    case '*':
+                        stack.push(val1 * val2);
+                        break;
+                    case '/':
+                        stack.push(val1 / val2);
+                        break;
                 }
             }
         }
+        return stack.pop();
+    }
 
-        System.out.println(st.pop());
+    public static void main(String[] args) {
+        String exp = "2 3 1 * + 9 -";
+        System.out.println("Result: " + evaluatePostfix(exp));
     }
 }
