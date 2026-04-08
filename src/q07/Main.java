@@ -3,44 +3,58 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+int[] stack = new int[n];
+int top = -1;
 
-        int n = sc.nextInt();   // only ONE size
+for (int i = 0; i < n; i++) {
+    String op = sc.next();
 
-        int[][] A = new int[n][n];
-        int[][] B = new int[n][n];
+    if (op.equals("PUSH")) {
+        int x = sc.nextInt();
+        top++;
+        stack[top] = x;
 
-        // input matrix A
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                A[i][j] = sc.nextInt();
-            }
+    } else if (op.equals("POP")) {
+        if (top == -1) {
+            System.out.println("EMPTY");
+        } else {
+            System.out.println(stack[top]);
+            top--;
         }
 
-        // input matrix B
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                B[i][j] = sc.nextInt();
-            }
+    } else if (op.equals("PEEK")) {
+        if (top == -1) {
+            System.out.println("EMPTY");
+        } else {
+            System.out.println(stack[top]);
         }
 
-        int[][] C = new int[n][n];
+    } else if (op.equals("SIZE")) {
+        System.out.println(top + 1);
+    }
+}
+        // TODO: Implement a stack using an array (no Java Stack class)
+        //       Process n operations:
+        //         PUSH x  → push integer x
+        //         POP     → pop top, print it; if empty print "EMPTY"
+        //         PEEK    → print top without removing; if empty print "EMPTY"
+        //         SIZE    → print current number of elements
+        //
+        // Input:
+        // 6
+        // PUSH 10
+        // PUSH 20
+        // PEEK
+        // POP
+        // POP
+        // POP
+        //
+        // Output:
+        // 20
+        // 20
+        // 10
+        // EMPTY
 
-        // multiplication
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                for(int k = 0; k < n; k++) {
-                    C[i][j] += A[i][k] * B[k][j];
-                }
-            }
-        }
-
-        // print result (NO extra space)
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(j > 0) System.out.print(" ");
-                System.out.print(C[i][j]);
-            }
-            System.out.println();
-        }
     }
 }
