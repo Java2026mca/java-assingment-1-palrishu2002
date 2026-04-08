@@ -1,38 +1,27 @@
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
 
     public static int evaluatePostfix(String exp) {
         Stack<Integer> stack = new Stack<>();
+        String[] tokens = exp.trim().split("\\s+");
 
-        for (int i = 0; i < exp.length(); i++) {
-            char ch = exp.charAt(i);
+        for (String token : tokens) {
 
-            // Skip spaces
-            if (ch == ' ')
-                continue;
-
-            // If digit, push to stack
-            if (Character.isDigit(ch)) {
-                stack.push(ch - '0');
+            // If number → push
+            if (Character.isDigit(token.charAt(0))) {
+                stack.push(Integer.parseInt(token));
             } 
+            // If operator → pop and calculate
             else {
-                int val2 = stack.pop();
-                int val1 = stack.pop();
+                int b = stack.pop();
+                int a = stack.pop();
 
-                switch (ch) {
-                    case '+':
-                        stack.push(val1 + val2);
-                        break;
-                    case '-':
-                        stack.push(val1 - val2);
-                        break;
-                    case '*':
-                        stack.push(val1 * val2);
-                        break;
-                    case '/':
-                        stack.push(val1 / val2);
-                        break;
+                switch (token) {
+                    case "+": stack.push(a + b); break;
+                    case "-": stack.push(a - b); break;
+                    case "*": stack.push(a * b); break;
+                    case "/": stack.push(a / b); break;
                 }
             }
         }
@@ -40,7 +29,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String exp = "2 3 1 * + 9 -";
-        System.out.println("Result: " + evaluatePostfix(exp));
+        Scanner sc = new Scanner(System.in);
+
+        // IMPORTANT: take input from grader
+        String exp = sc.nextLine();
+
+        // IMPORTANT: print ONLY result (no "Result:")
+        System.out.println(evaluatePostfix(exp));
     }
 }
