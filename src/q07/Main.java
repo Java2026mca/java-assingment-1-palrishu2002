@@ -6,7 +6,6 @@ public class Main {
         
         int n = sc.nextInt();
         
-        // Read n integers into array
         int[] arr = new int[n];
         for(int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
@@ -14,27 +13,31 @@ public class Main {
 
         int swapCount = 0;
 
-        // Bubble Sort
+        // Bubble Sort with optimization
         for(int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
+
             for(int j = 0; j < n - i - 1; j++) {
                 if(arr[j] > arr[j + 1]) {
-                    // swap
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
-                    
+
                     swapCount++;
+                    swapped = true;
                 }
             }
+
+            if(!swapped) break;
         }
 
-        // Print sorted array
+        // Print WITHOUT trailing space
         for(int i = 0; i < n; i++) {
-            System.out.print(arr[i] + " ");
+            if(i > 0) System.out.print(" ");
+            System.out.print(arr[i]);
         }
         System.out.println();
 
-        // Print swap count
         System.out.println("Swaps: " + swapCount);
     }
 }
