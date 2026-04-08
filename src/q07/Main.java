@@ -1,26 +1,29 @@
+package q07;
+
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        // Input size
         int n = sc.nextInt();
-        int[] arr = new int[n];
 
+        // Input array
+        int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
         int swapCount = 0;
 
-        // ✅ Optimized Bubble Sort
+        // Bubble Sort
         for (int i = 0; i < n - 1; i++) {
             boolean swapped = false;
 
             for (int j = 0; j < n - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
-
+                    // Swap
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
@@ -30,17 +33,17 @@ public class Main {
                 }
             }
 
-            // 🔥 Important optimization
+            // Optimization: stop if already sorted
             if (!swapped) break;
         }
 
-        // Print sorted array
+        // Output sorted array
         for (int i = 0; i < n; i++) {
-            System.out.print(arr[i]);
-            if (i != n - 1) System.out.print(" ");
+            System.out.print(arr[i] + " ");
         }
-
         System.out.println();
-        System.out.println("Swaps: " + swapCount);
+
+        // Output swap count
+        System.out.println(swapCount);
     }
 }
